@@ -29,6 +29,38 @@ const (
 	Retired     = 3
 )
 
+func printServerStatus(servers map[string]int) {
+	fmt.Println("\nThere are", len(servers), "servers")
+	stats := make(map[int]int)
+
+	for _, status := range servers {
+		stats[status] += 1
+	}
+
+	fmt.Println(stats[Online], "servers are online")
+	fmt.Println(stats[Offline], "servers are offline")
+	fmt.Println(stats[Maintenance], "servers are maintanence")
+	fmt.Println(stats[Retired], "servers are retired")
+}
+
 func main() {
 	servers := []string{"darkstar", "aiur", "omicron", "w359", "baseline"}
+
+	serverStatus := make(map[string]int)
+
+	for _, server := range servers {
+		serverStatus[server] = Online
+	}
+	// panic("") Terminate the program immdediately: Throw error similar
+	printServerStatus(serverStatus)
+
+	serverStatus["darkstar"] = Retired
+	serverStatus["aiur"] = Offline
+
+	printServerStatus(serverStatus)
+	for server := range serverStatus {
+		serverStatus[server] = Maintenance
+	}
+	printServerStatus(serverStatus)
+
 }

@@ -19,4 +19,12 @@ import "fmt"
 type Part string
 
 func main() {
+	assemblyLine := []string{"part1", "part2", "part3"}
+	fmt.Println(assemblyLine)
+	assemblyLine = append(assemblyLine, "part4", "part5")
+
+	fmt.Println(assemblyLine)
+	slice := assemblyLine[3:5]
+	fmt.Println(slice)
+
 }

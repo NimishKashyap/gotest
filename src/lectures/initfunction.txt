@@ -1,0 +1,25 @@
+var EmailExpr *regexp.Regexp 
+
+func init() {
+    complied, ok := regexp.Compile('.+@.+\..+')
+
+    if ok != nil {
+        panic("Failed to compile regular expression")
+    }
+
+    EmailExpr = compiled 
+    fmt.Println("Regular expression compiled successfully")
+}
+
+func isValidEmail(addr string) bool {
+    return EmailExpr.Match([]byte(addr))
+}
+
+func main() {
+    fp(isValidEmail)
+}
+
+// each package can have it's own init() function
+
+// all packages will execute init() before main() runs
+

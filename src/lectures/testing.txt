@@ -1,0 +1,78 @@
+important to test software to prevent regressions and
+
+ensure it meets specifications
+
+Unit testing
+Integration Testing 
+
+Go makes no distinction between the two 
+    Same process to create both unit & integration test 
+
+
+// Important 
+Tests are written in seperate files, sharing the name of the
+file they are testing 
+
+importantPkg.go --> importantPkg_test.go
+
+// Unit tests should be in the same package 
+
+// The testing package is used to create tests and must
+be imported in each test file
+
+
+// sample.go
+
+package main 
+import "regexp"
+
+func IsValidEmail(addr string) bool {
+    ....
+}
+
+sample_test.go
+
+package main 
+import "testing"
+
+// arguments always be t *testing.T
+func TestIsValidEmail(t *testing.T) {
+    data := "email@example.com"
+
+    if !IsValidEmail(data) {
+        t.Errorf("IsValidEmail(%v)=false, want true")
+    }
+}
+
+RUN USING : go test
+
+
+Testing functions: 
+
+Fail() - Mark the test as failed 
+ Errorf(string) - Fail & add a message
+
+FailNow() - Mark the test as failed, abort current test 
+ - Fatalf(string) - Fail, abort, and add a message
+
+Logf() - Equivalent to Printf, but only when test fails
+
+TEST TABLES - Parameterized tables 
+
+func TestIsValidEmailTable(t *testing.T) {
+    table := []struct {
+        email string 
+        want bool
+    }{
+        {"email@example.com", true},
+        {"email@example", false},
+    }
+
+    for _, data := range table {
+        result := IsValidEmail(data.email)
+
+        if result != data.want {
+            t.Errorf("%v: %t, want: %t",data.email, result,data.want)
+        }
+    }
+}

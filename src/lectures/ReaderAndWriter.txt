@@ -1,0 +1,101 @@
+Reader and Writer are intefaces that allow reading from
+and writing to I/O sources
+    Network sockets, files, arbitrary arrays 
+
+Multiple implementations in std library 
+
+Reader is low level implementation
+    usually want to work with bufio package instead of
+    Reader directly
+
+
+type Reader interface {
+    Read(p []byte) (n int, err error)
+}
+type Writer interface {
+    Write(p []byte) (n int, err error)
+}
+
+Reader :
+Each call to Read() will fill the provided p buffer
+    The number of butes read will be returned as n
+
+When all bytes have been read, err will be io.EOF
+
+Example:
+
+reader := strings.NewReader("SAMPLE")
+
+var newString strings.Builder 
+buffer := make([]byte,4)
+
+for {
+    numBytes, err := reader.Read(buffer)
+    chunk := buffer[:numBytes]
+    newString.Write(chuck)
+    fmt.Printf(chunk)
+
+    print 
+
+    if err == io.EOF {
+        break
+    }
+}
+
+fmt.Printf(newString.String())
+
+OUTPUT: 
+    Read 4 bytes: [S A M P]
+    Read 2 byutes: [L E]
+    Read 0 bytes: []
+    SAMPLE
+
+bufio package:
+bufio package provides Reader & Writer buffering
+    No need to manually manage buffers or construct data
+
+#####################################
+source := strings.NewReader("SAMPLE")
+buffered := bufio.NewReader(source)
+
+newString, err := buffered.ReadString("\n")
+
+if err == io.EOF {
+    fp(newString)
+} else {
+    fp("Something went wrong...")
+}
+#####################################
+bufio.Scanner -> provides convenience functions
+
+scanner := bufio.NewScanner(os.Stdin)
+lines := make([]string, 0, 5)
+
+for scanner.Scan() {
+    lines = append(lines,scanner.Text())
+}
+if scanner.Err() != nil {
+    fp(scanner.Err())
+}
+fp("Line count: %v\n", len(lines))
+
+for _, line := range lines {
+    fp("Line: %v\n"a, line)
+}
+
+##############################################
+Writer intefaces
+
+buffer := bytes.NewBufferString("")
+numBytes, err := buffer.WriteString("SAMPLE")
+
+if err!= nil {
+    fp(err)
+} else {
+    fp("Wrote %v bytes: %c\n",numBytes,buffer)
+}
+#############################################
+
+
+
+

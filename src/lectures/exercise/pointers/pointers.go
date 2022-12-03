@@ -16,8 +16,55 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
+
+type Items struct {
+	item        string
+	isActivated bool
+}
+
+type SecurityTag bool
+
+type Item struct {
+	name string
+	tag  SecurityTag
+}
+
+func activate(tag *SecurityTag) {
+	*tag = true
+}
+func deactivate(tag *SecurityTag) {
+	*tag = false
+}
+func toggleActivation(item *Items) {
+	item.isActivated = !item.isActivated
+
+func checkout(items []Items) {
+	for index := range items {
+		items[index].isActivated = false
+	}
+
+}
+
+func checkout2(items []Item) {
+	fmt.Println("Checking out...")
+	
+	for index := range items {
+		deactivate(&items[i].tag)
+	}
+
+}
 
 func main() {
+	items := []Items{{item: "1", isActivated: true}, {item: "2", isActivated: true}, {item: "3", isActivated: true}, {item: "4", isActivated: true}}
 
+	toggleActivation(&items[0])
+
+	fmt.Println(items)
+
+	checkout(items)
+
+	fmt.Println(items)
 }

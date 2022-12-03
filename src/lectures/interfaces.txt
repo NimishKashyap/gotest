@@ -1,0 +1,37 @@
+It is sometimes needed to access the underlying type 
+that implements an interface
+
+Call functions, make modifications
+
+type Resetter interface {
+    Reset()
+}
+
+type Player struct {
+    health int
+    position Coordinate
+}
+
+func (p *Player) Reset() {
+    p.health = 100 
+    p.position = Coordinate{0,0}
+}
+
+func Reset(r Resetter) {
+    r.Reset()
+}
+
+func ResetWithPenalty(r Resetter) {
+    if player, ok := r.(Player); ok {
+        player.health = 50
+    } else {
+        r.Reset()
+    }
+}
+
+player := Player{50,Coordinate{1,2}}
+
+fp(player)
+
+Reset(&player)
+fp(player)

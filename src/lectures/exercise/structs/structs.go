@@ -19,6 +19,26 @@ package main
 
 import "fmt"
 
+type Rectangle struct {
+	s1, s2 int
+}
+
+func area(r *Rectangle) int {
+	return r.s1 * r.s2
+}
+
+func perimeter(r *Rectangle) int {
+	return 2 * (r.s1 + r.s2)
+}
 func main() {
+	var r Rectangle = Rectangle{1, 2}
+	fmt.Println(area(&r))
+	fmt.Println(perimeter(&r))
+
+	r.s1 = r.s1 * 2
+	r.s2 = r.s2 * 2
+
+	fmt.Println(area(&r))
+	fmt.Println(perimeter(&r))
 
 }

@@ -1,0 +1,76 @@
+iota keyword can be used to automatically assign values
+
+const (
+    Online = 0
+    Offlien = 1
+    Maintanence = 2
+    Retired = 3
+)
+
+is same as 
+
+const (
+    Online = iota 
+    Offline 
+    Maintanence 
+    Retired
+)
+iota automatically assign 
+
+Long form: 
+const (
+    L0 = iota // 0  
+    L1 = iota // 1
+    L2 = iota // 2
+
+)
+
+Short form:
+const (
+    L0 = iota // 0
+    L1 // 1 
+    L2  // 2
+)
+
+// Skip a value 
+const(
+    s0 = iota //0
+    - //1 (skip)
+    s2 = iota //2
+    s3 = iota //3
+)
+
+// start at 3 
+
+const (
+    i3 = iota + 3 // 3 = iota + 3
+    i4  // 4
+    i5 // 5
+)
+
+////////////// Iota Enumeration Pattern //////////
+
+type Direction byte 
+
+const (
+    North Direction = iota
+    East
+    South
+    West
+)
+
+north := North 
+fp.Println(north) // Prints north
+
+func (d Direction) String() string {
+    switch d {
+        case North
+            return fp(North)
+    }
+}
+
+///////////////////////////////////////////////
+
+
+
+

@@ -21,6 +21,48 @@ package main
 
 import "fmt"
 
-func main() {
+type Lifter interface {
+	Lift(int) int
+}
 
+type Motorcycle struct {
+	size int
+}
+type Cars struct {
+	size int
+}
+type Trucks struct {
+	size int
+}
+
+func (m Motorcycle) Lift(size int) int {
+	return size + 2
+}
+func (m Cars) Lift(size int) int {
+	return size + 5
+}
+func (m Trucks) Lift(size int) int {
+	return size + 9
+}
+
+func Lift(l []Lifter) {
+	for _, value := range l {
+		var val int
+		if vehicle, ok := value.(Motorcycle); ok {
+			val = vehicle.Lift(5)
+		} else if vehicle, ok := value.(Cars); ok {
+			val = vehicle.Lift(9)
+		} else {
+			val = vehicle.Lift(15)
+		}
+
+		fmt.Println(val)
+
+	}
+}
+
+func main() {
+	vehicles := []Lifter{Motorcycle{size: 10}, Cars{size: 15}, Trucks{size: 30}}
+
+	Lift(vehicles)
 }
