@@ -1,0 +1,42 @@
+Function literals provide a way to define a Functionwithin a Function 
+
+Possible to assign function literals to variables
+ 
+They can be passed to a fucntion as parameters
+    -> more dynamic code 
+
+Also known as closures or anonymous functions
+    -> closures allow data to be encapsulated within
+    -> Just like javascript
+
+func customMsg(fn func(m String) , msg string) {
+    fn(msg)
+} 
+
+func surround() func(msg string) {
+    return func(msg string) {
+        fp("HELLO:")
+        fp(msg)
+    }
+}
+
+func HelloWorld () {
+    fmt.Print("HELLO")
+    world := func() {
+        fp(WORLDJ)
+    }
+    world()
+    world()
+    world()
+    world()
+    world()
+}
+
+discount := 0.1
+discountFn := func(subTotal float64) float64 {
+    if subTotal > 100.0 {
+        discount += 0.1
+    }
+}
+
+type DiscountFunc func(subTotal float64) float64

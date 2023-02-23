@@ -1,0 +1,47 @@
+Useful to run operations after functions complete
+
+func one()
+{
+    fp(1)
+}
+func two()
+{
+    fp(2)
+}
+func three()
+{
+    fp(3)
+}
+
+func sample() 
+{
+    fmt.Println("BEGIN")
+    defer one()
+    defer two()
+    defer three()
+
+    // 3 2 1 (function stack)
+}
+
+
+///////////////// 
+file, err := os.Open("Sample.txt")
+
+if err != nil {
+    fp(err)
+    err
+}
+
+defer file.Close()
+
+buffer := make([]byte, 0, 30)
+bytes, err := file.Read(buffer)
+
+if err != nil 
+{
+    fp(err)
+}
+
+fp(bytes)
+
+

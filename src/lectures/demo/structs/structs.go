@@ -41,7 +41,9 @@ func main() {
 	}
 
 	heidi.Boarded = true
-	bus := Bus{heidi}
+	bus := Bus{}
+
+	bus.FrontSeat = heidi
 
 	fmt.Println(bus)
 	fmt.Println(bus.FrontSeat.Name, "is in the front seat")
